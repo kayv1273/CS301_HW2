@@ -1,3 +1,4 @@
+// Katherine Vu
 package com.example.a15_puzzle;
 public class SquareModel {
 
