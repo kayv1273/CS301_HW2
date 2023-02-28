@@ -10,12 +10,12 @@ public class SquareController implements View.OnClickListener {
         this.sv = sv;
     }
     public void onClick(View view) {
-        if (view.getId() == R.id.start) { sv.shuffle(); }
+        if (view.getId() == R.id.start) { sv.shuffle(); } // Shuffles when restart is clicked
         int swap = view.getId();
         ArrayList<Integer> Moves = sv.canMove();
         if(Moves.contains(swap)) {
             sv.swap(view);
-            if(sv.gameOver()) { sv.isWinner(); }
+            if(sv.gameOver()) { sv.isWinner(); } // If game won
         }
     }
 }

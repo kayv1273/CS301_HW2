@@ -13,15 +13,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // create the model, view, controller
         SquareModel sm = new SquareModel();
         SquareView sv = new SquareView(sm);
         SquareController sc = new SquareController(sm, sv);
-
-        // create the reset button
+        // Restart button
         Button reStart = findViewById(R.id.start);
-
-        // add game buttons to the array
+        // Buttons in array
         sv.addButton(0,0,findViewById(R.id.b_11));
         sv.addButton(0,1,findViewById(R.id.b_12));
         sv.addButton(0,2,findViewById(R.id.b_13));
@@ -40,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         sv.addButton(3,3,findViewById(R.id.b_44));
         reStart.setOnClickListener(sc);
         sv.setOnClick(sc);
+        // Shuffles game at start
         sv.shuffle();
     }
 }
