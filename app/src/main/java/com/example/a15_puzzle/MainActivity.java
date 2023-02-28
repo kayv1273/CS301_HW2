@@ -12,6 +12,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         SquareModel sm = new SquareModel();
         SquareView sv = new SquareView(sm);
+        SquareController sc = new SquareController(sm,sv);
+
         sv.addSquare(0,0,findViewById(R.id.b_11));
         sv.addSquare(0,1,findViewById(R.id.b_12));
         sv.addSquare(0,2,findViewById(R.id.b_13));
@@ -28,10 +30,10 @@ public class MainActivity extends AppCompatActivity {
         sv.addSquare(3,1,findViewById(R.id.b_42));
         sv.addSquare(3,2,findViewById(R.id.b_43));
         sv.addSquare(3,3,findViewById(R.id.b_44));
+
         sv.addRestart(findViewById(R.id.start));
 
-        SquareController sc = new SquareController(sm,sv);
         sv.setOnClick(sc);
-        sv.shuffle();
+        sc.shuffle();
     }
 }

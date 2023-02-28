@@ -212,6 +212,7 @@
                 android:layout_gravity="center_vertical"
                 android:backgroundTint="@color/purple_200"
                 android:fontFamily="serif-monospace"
+                android:text="NULL"
                 android:textSize="34sp"
                 android:visibility="invisible" />
         </TableRow>

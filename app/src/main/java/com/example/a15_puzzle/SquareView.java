@@ -3,10 +3,9 @@ package com.example.a15_puzzle;
 import android.graphics.Color;
 import android.view.View;
 import android.widget.Button;
-
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Random;
+
 
 public class SquareView {
     private SquareModel sm;
@@ -34,94 +33,88 @@ public class SquareView {
         }
         reStart.setOnClickListener(sc);
     }
-
-    public int[] canMove() {
-        int[] num = new int[2];
-        int row = sm.erow();
-        int col = sm.ecol();
-        switch (row) {
+    public void shuffleText(ArrayList<Integer> numbers) {
+        int index = 0;
+        for(int row = 0; row < 4; row++) {
+            for(int col = 0; col < 4; col++) {
+                if(index == 15) { break; }
+                squares[row][col].setText(Integer.toString(numbers.get(index)));
+                index++;
+            }
+        }
+    }
+    public ArrayList<Integer> canMove() {
+        ArrayList<Integer> num = new ArrayList<>();
+        switch (sm.erow()) {
             case 0:
-                num[1] = squares[row + 1][col].getId();
+                num.add(squares[sm.erow() + 1][sm.ecol()].getId());
                 break;
             case 3:
-                num[1] = squares[row - 1][col].getId();
+                num.add(squares[sm.erow() - 1][sm.ecol()].getId());
                 break;
-            default:
-                num[1] = squares[row + 1][col].getId();
-                num[1] = squares[row - 1][col].getId();
+            case 1:
+            case 2:
+                num.add(squares[sm.erow() + 1][sm.ecol()].getId());
+                num.add(squares[sm.erow() - 1][sm.ecol()].getId());
                 break;
 
         }
-        switch (col) {
+        switch (sm.ecol()) {
             case 0:
-                num[2] = squares[row][col + 1].getId();
+                num.add(squares[sm.erow()][sm.ecol() + 1].getId());
                 break;
             case 3:
-                num[2] = squares[row][col - 1].getId();
+                num.add(squares[sm.erow()][sm.ecol() - 1].getId());
                 break;
-            default:
-                num[2] = squares[row][col + 1].getId();
-                num[2] = squares[row][col - 1].getId();
+            case 1:
+            case 2:
+                num.add(squares[sm.erow()][sm.ecol() + 1].getId());
+                num.add(squares[sm.erow()][sm.ecol() - 1].getId());
                 break;
         }
         return num;
     }
 
     public void swap(View swap) {
-        Button click = (Button) swap;
-        Button temp = click;
-        click = squares[sm.erow()][sm.ecol()];
-        squares[sm.erow()][sm.ecol()] = temp;
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 0; j++) {
-                if (squares[i][j].getId() == click.getId()) {
-                    sm.setErow(i);
-                    sm.setEcol(j);
-                }
-            }
-        }
-    }
+        Button click = (Button)swap;
+        String text = click.getText().toString();
 
-    /**
-     * public void disable(int row, int col) {
-     * squares[row][col].setVisibility(View.INVISIBLE);
-     * }
-     * public void enable(int row, int col) {
-     * squares[row][col].setVisibility(View.VISIBLE);
-     * //squares[row][col].setText(Integer.toString(sm.moves()));
-     * }
-     * public int isVisible(int row, int col) {
-     * return squares[row][col].getVisibility();
-     * }
-     **/
-    public void shuffle() {
-        ArrayList<Integer> numbers = new ArrayList<Integer>();
-        for (int i = 0; i < 16; i++) {
-            numbers.add(i);
-        }
-        Collections.shuffle(numbers);
-    }
-
-    public void gameOver() {
-        String[] numbers = {
-                "1", "2", "3", "4",
-                "5", "6", "7", "8",
-                "9", "10", "11", "12",
-                "13", "14", "15"
-        };
-        int index = 0;
-        int count = 0;
+        squares[sm.erow()][sm.ecol()].setVisibility(View.VISIBLE);
+        squares[sm.erow()][sm.ecol()].setClickable(true);
+        squares[sm.erow()][sm.ecol()].setText(text);
+        click.setVisibility(View.VISIBLE);
+        click.setClickable(false);
         for (int row = 0; row < 4; row++) {
             for (int col = 0; col < 4; col++) {
-                if (squares[row][col].getText().equals(numbers[index])) {
-                    count++;
+                if (squares[row][col].getId() == click.getId()) {
+                    sm.setErow(row);
+                    sm.setEcol(col);
                 }
-                if (count == 15) {
-                    squares[row][col].setBackgroundColor(Color.GREEN);
-                    break;
-                }
-                index++;
             }
         }
     }
-}
+
+        public boolean gameOver() {
+            String[] numbers = {
+                    "1", "2", "3", "4",
+                    "5", "6", "7", "8",
+                    "9", "10", "11", "12",
+                    "13", "14", "15"
+            };
+            int index = 0;
+            int count = 0;
+            for (int row = 0; row < 4; row++) {
+                for (int col = 0; col < 4; col++) {
+                    if (squares[row][col].getText().equals(numbers[index])) {
+                        count++;
+                    }
+                    if (count == 15) {
+                        squares[row][col].setBackgroundColor(Color.GREEN);
+                        return true;
+                    }
+                    index++;
+                }
+            }
+            return false;
+        }
+    }

@@ -1,6 +1,7 @@
 package com.example.a15_puzzle;
 
 public class SquareModel {
+    // Variables for empty row and col
     int erow;
     int ecol;
     int moves;
