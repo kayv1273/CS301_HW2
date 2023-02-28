@@ -3,6 +3,8 @@ package com.example.a15_puzzle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -10,30 +12,34 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // create the model, view, controller
         SquareModel sm = new SquareModel();
         SquareView sv = new SquareView(sm);
-        SquareController sc = new SquareController(sm,sv);
+        SquareController sc = new SquareController(sm, sv);
 
-        sv.addSquare(0,0,findViewById(R.id.b_11));
-        sv.addSquare(0,1,findViewById(R.id.b_12));
-        sv.addSquare(0,2,findViewById(R.id.b_13));
-        sv.addSquare(0,3,findViewById(R.id.b_14));
-        sv.addSquare(1,0,findViewById(R.id.b_21));
-        sv.addSquare(1,1,findViewById(R.id.b_22));
-        sv.addSquare(1,2,findViewById(R.id.b_23));
-        sv.addSquare(1,3,findViewById(R.id.b_24));
-        sv.addSquare(2,0,findViewById(R.id.b_31));
-        sv.addSquare(2,1,findViewById(R.id.b_32));
-        sv.addSquare(2,2,findViewById(R.id.b_33));
-        sv.addSquare(2,3,findViewById(R.id.b_34));
-        sv.addSquare(3,0,findViewById(R.id.b_41));
-        sv.addSquare(3,1,findViewById(R.id.b_42));
-        sv.addSquare(3,2,findViewById(R.id.b_43));
-        sv.addSquare(3,3,findViewById(R.id.b_44));
+        // create the reset button
+        Button reStart = findViewById(R.id.start);
 
-        sv.addRestart(findViewById(R.id.start));
-
+        // add game buttons to the array
+        sv.addButton(0,0,findViewById(R.id.b_11));
+        sv.addButton(0,1,findViewById(R.id.b_12));
+        sv.addButton(0,2,findViewById(R.id.b_13));
+        sv.addButton(0,3,findViewById(R.id.b_14));
+        sv.addButton(1,0,findViewById(R.id.b_21));
+        sv.addButton(1,1,findViewById(R.id.b_22));
+        sv.addButton(1,2,findViewById(R.id.b_23));
+        sv.addButton(1,3,findViewById(R.id.b_24));
+        sv.addButton(2,0,findViewById(R.id.b_31));
+        sv.addButton(2,1,findViewById(R.id.b_32));
+        sv.addButton(2,2,findViewById(R.id.b_33));
+        sv.addButton(2,3,findViewById(R.id.b_34));
+        sv.addButton(3,0,findViewById(R.id.b_41));
+        sv.addButton(3,1,findViewById(R.id.b_42));
+        sv.addButton(3,2,findViewById(R.id.b_43));
+        sv.addButton(3,3,findViewById(R.id.b_44));
+        reStart.setOnClickListener(sc);
         sv.setOnClick(sc);
-        sc.shuffle();
+        sv.shuffle();
     }
 }

@@ -228,15 +228,6 @@
                 android:backgroundTint="@color/design_default_color_primary"
                 android:text="Re-Start" />
 
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center|center_horizontal|center_vertical"
-                android:gravity="center|center_vertical"
-                android:text="Moves: 0"
-                android:textSize="24sp" />
-
         </TableRow>
 
     </TableLayout>
